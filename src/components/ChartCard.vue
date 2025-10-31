@@ -30,15 +30,28 @@ import {
 // Registrar los componentes del gráfico
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
-// Datos del gráfico 📊
+// Datos del gráfico 📊 - COLORES LILAS CAMBIADOS
 const chartData = {
   labels: ['Jun', 'Jul', 'Ago', 'Sep', 'Oct'],
   datasets: [
     {
       label: 'Clientes Nuevos',
-      backgroundColor: '#7b47f5',
+      backgroundColor: [
+        '#c4b5fd', // Lila más claro
+        '#a78bfa', // Lila medio claro
+        '#8b5cf6', // Lila medio
+        '#7c3aed', // Lila medio oscuro
+        '#6d28d9'  // Lila más oscuro
+      ],
       borderRadius: 12,
-      data: [25, 40, 32, 48, 60] // Datos mensuales
+      data: [25, 40, 32, 48, 60],
+      hoverBackgroundColor: [
+        '#ddd6fe',
+        '#c4b5fd',
+        '#a78bfa',
+        '#8b5cf6',
+        '#7c3aed'
+      ]
     }
   ]
 }
@@ -51,16 +64,25 @@ const chartOptions = {
     y: {
       beginAtZero: true,
       ticks: {
-        color: '#555',
+        color: '#6b7280',
+        font: {
+          size: 12,
+          weight: '500'
+        },
         stepSize: 10
       },
       grid: {
-        color: '#eee'
+        color: '#f3f4f6',
+        drawBorder: false
       }
     },
     x: {
       ticks: {
-        color: '#555'
+        color: '#6b7280',
+        font: {
+          size: 13,
+          weight: '600'
+        }
       },
       grid: {
         display: false
@@ -72,9 +94,17 @@ const chartOptions = {
       display: false
     },
     tooltip: {
-      backgroundColor: '#5a35f1',
+      backgroundColor: '#7c3aed',
       titleColor: '#fff',
-      bodyColor: '#fff'
+      bodyColor: '#fff',
+      padding: 12,
+      cornerRadius: 8,
+      displayColors: false,
+      callbacks: {
+        label: function(context) {
+          return context.parsed.y + ' clientes'
+        }
+      }
     }
   }
 }
@@ -93,8 +123,9 @@ const chartOptions = {
 
 h3 {
   text-align: center;
-  color: #5a35f1;
-  font-weight: 600;
+  color: #7c3aed;
+  font-weight: 700;
+  font-size: 1.125rem;
 }
 
 .chart-container {
@@ -102,15 +133,21 @@ h3 {
 }
 
 .summary {
-  background-color: #f7f5ff;
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
   border-radius: 12px;
-  padding: 1rem;
+  padding: 1rem 1.25rem;
   font-size: 0.95rem;
-  color: #333;
-  line-height: 1.4;
+  color: #4b5563;
+  line-height: 1.6;
+  border-left: 4px solid #8b5cf6;
+}
+
+.summary p {
+  margin: 0.5rem 0;
 }
 
 .summary strong {
-  color: #5a35f1;
+  color: #7c3aed;
+  font-weight: 700;
 }
 </style>
